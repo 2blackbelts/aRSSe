@@ -14,6 +14,7 @@
 		$html->load_file($url);
 		$ettv_root = "https://extratorrent.one";
 
+		// TODO: find table rows with class 'tlr' to get links
 		print '<pre>';
 		$all = $html->find('tr[class="tlr"]');
 		print_r($all);
