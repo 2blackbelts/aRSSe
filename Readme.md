@@ -3,4 +3,4 @@ aRSSe is an RSS feed of the latest torrents compiled into one simple web page. S
 
 ##Setup
 
-tbc
+chmod and chown files - tbc
