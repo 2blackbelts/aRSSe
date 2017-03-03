@@ -1,0 +1,76 @@
+.no-js #loader { display: none;  }
+.js #loader { display: block; position: absolute; left: 100px; top: 0; }
+.se-pre-con {
+	position: fixed;
+	left: 0px;
+	top: 0px;
+	width: 100%;
+	height: 100%;
+	z-index: 9999;
+	background: url(images/loader-128x/Preloader_2.gif) center no-repeat #fff;
+}
+
+.realm {
+	background-color: #000;
+	padding-top: 15px;
+}
+
+.counter-new {
+	position: fixed;
+	padding: 1px;
+	background: darkcyan none repeat scroll 0% 0%;
+	color: white;
+	left: 0px;
+	top: 0px;
+	height: 20px;
+	width: 28px;
+	text-align: center;
+	z-index: 2;
+}
+
+.counter-tick {
+    position: fixed;
+    padding: 1px;
+    background: rgb(48, 212, 24) none repeat scroll 0% 0%;
+    color: white;
+    top: 20px;
+    left: 0px;
+    height: 20px;
+	width: 28px;
+	text-align: center;
+	z-index: 2;
+}
+
+body {
+	font-size: 160%;
+}
+
+li {
+    color: black;
+}
+li:nth-child(odd) {
+    color: #a94442;
+}
+li:nth-child(even) {
+    color: #333;
+}
+.dont-break-out {
+
+  /* These are technically the same, but use both */
+  overflow-wrap: break-word;
+  word-wrap: break-word;
+
+  -ms-word-break: break-all;
+  /* This is the dangerous one in WebKit, as it breaks things wherever */
+  word-break: break-all;
+  /* Instead use this non-standard one: */
+  word-break: break-word;
+
+  /* Adds a hyphen where the word breaks, if supported (No Blink) */
+  -ms-hyphens: auto;
+  -moz-hyphens: auto;
+  -webkit-hyphens: auto;
+  hyphens: auto;
+
+}
+
