@@ -1,2 +1,5 @@
 #ignore any downloaded torrent files
-/torrents/**
+torrents/*
+
+# Keep torrent folder in repo
+!torrents/.gitkeep 
