@@ -13,3 +13,9 @@ sudo chmod 777 torrents
 
 ###Setup torrent directory
 Point your Torrent client's listening directory to ```/aRSSe/torrents```
+
+###Get latest version
+```
+git fetch
+git reset --hard origin/master
+```
