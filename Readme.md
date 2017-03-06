@@ -12,4 +12,4 @@ sudo chmod 777 torrents
 ```
 
 ###Setup torrent directory
-Point your Torrent client's listening directory to /aRSSe/torrents
+Point your Torrent client's listening directory to ```/aRSSe/torrents```
