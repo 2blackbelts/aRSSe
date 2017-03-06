@@ -12,7 +12,7 @@
 	}
 
 	function clean($string) {
-		$ugly = array("http://extratorrent.cc/torrent","https://eztv.ag/movie","https://yts.ag/movie", "+", "-", "%", "/", "#");
+		$ugly = array("http://extratorrent.cc/torrent","https://extra.to/torrent","https://eztv.ag/movie","https://yts.ag/movie", "+", "-", "%", "/", "#");
 		$pretty = str_replace($ugly, " ", $string);
 		return $pretty;
 	}
