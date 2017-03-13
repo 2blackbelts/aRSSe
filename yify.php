@@ -2,6 +2,7 @@
 
 <?php
 	$term = $_GET['searched'];
+	$term = str_replace(" ", "%20", $term);
 	// echo $say;
 	$url = file_get_contents('http://yify.is/api/v2/list_movies.json?query_term=' . $term);
 	$result = json_decode($url);
