@@ -21,6 +21,12 @@ sudo chmod 777 torrents
 ### Setup torrent directory
 Point your Torrent client's listening directory to ```/aRSSe/torrents```
 
+End of Transmission's settings.json
+```
+"watch-dir": "/var/www/html/rss/torrents",
+"watch-dir-enabled": true
+```
+
 ### Get latest version (over-write local)
 ```
 git fetch
