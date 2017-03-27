@@ -15,7 +15,7 @@ git clone https://github.com/2blackbelts/aRSSe.git
 cd aRSSe
 sudo find . -type f -exec chmod 644 {} \;
 sudo find . -type d -exec chmod 755 {} \;
-sudo chmod 777 torrents
+sudo chmod 777 torrents seen.txt
 ```
 
 ### Setup torrent directory
