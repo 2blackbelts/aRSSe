@@ -3,7 +3,6 @@
 <?php
 	include_once('simplehtmldom_1_5/simple_html_dom.php');
 
-
 		$term = $_GET['searched'];
 		$term = preg_replace("/[\s_]/", "-", $term);
 		$url = "https://extratorrent.one/search/?search=" . $term;
@@ -30,15 +29,15 @@
 			$torrent_link = str_replace('/torrent_download/', "", $torrent_link);
 			$torrent_link = $ettv_root . $torrent_link;
 			print '<input type="checkbox" name="torrent[]" value="' . $torrent_link .'">';
-			
+
 			print '<span class="glyphicon glyphicon-search"></span> ';
-			
+
 			// remove the word Torrent and Download from title
 			$title = $element->children(0)->children(0)->attr['title'];
 			$title = str_replace(array('Download ','torrent'), " ", $title);
 			print $title;
 			print '</label></div>';
-			
+
 			print '</li>';
 		}
 
@@ -47,7 +46,7 @@
 
 		// print_r($html->find("tr[class='tlr']",0)->children(0)->children(0)->attr['href']);
 		// echo "</pre>";
-					
+
 		// foreach($html->find("td[class='sy']") as $element) {
 		//     echo "<pre>";
 		//     print_r( $element );
@@ -71,16 +70,16 @@
 		// 	echo $key . ' :: ' . $value . '<br><br>';
 		// }
 
-		// $html_base->clear(); 
+		// $html_base->clear();
 		// unset($html_base);
-		
+
 		// get unit title
 		// $title = $html->find('h2', 0);
 		// $title = strip_tags($title);
-		
+
 
 			// echo '<h2>' . $title . '</h2>';
-			
+
 			// // Check if unit is current or not
 			// $version = $html->find('div[class="display-field"]',0)->plaintext;
 			// $version = str_replace(' ', '', $version);
@@ -95,13 +94,13 @@
 			// 	$tblrow = 0;
 			// 	echo '<p><span class="label label-danger">' . $version . '</span></p>';
 			// }
-			
-			// Find second ait-table in array 
+
+			// Find second ait-table in array
 			// $element = $html->find('a[class="epinfo"]');
-			
+
 			// print_r($element);
-			
-				
+
+
 			// loop through form with any p tags
 			// echo '<table style="border:1px solid #111;border-collapse:collapse;">';
 			// $count = 0;
@@ -111,10 +110,9 @@
 			// 		echo '<tr style=""><td style="border:1px solid;border-collapse:collapse;">';
 			// 		echo $p->plaintext . '<br>';
 			// 		echo '</td></tr>';
-				
-			
-			
+
+
+
 			// echo '</table>';
-		
+
 ?>
-       
