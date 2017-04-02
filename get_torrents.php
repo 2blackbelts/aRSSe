@@ -1,28 +1,7 @@
 	<div class="container dont-break-out">
 	<form class="" id="add" action="save_torrents.php" method="post">
 <?php
-	// $eztv = 'https://eztv.ag/ezrss.xml';
-	// $
-	function convert($url) {
-		$feed = implode(file($url));
-		$xml = simplexml_load_string($feed);
-		$json = json_encode($xml);
-		$array = json_decode($json,TRUE);
-		return $array;
-	}
-
-	function clean($string) {
-		$ugly = array("http://extratorrent.cc/torrent","https://extra.to/torrent","https://eztv.ag/movie","https://yts.ag/movie", "+", "-", "%", "/", "#");
-		$pretty = str_replace($ugly, " ", $string);
-		return $pretty;
-	}
-
-	function fix_et_link($url_to_fix) {
-		$old_url = 'http://extratorrent.cc';
-		$new_url = 'https://extratorrent.one';
-		$fixed = str_replace($old_url, $new_url, $url_to_fix);
-		return $fixed;
-	}
+	include 'functions.php';
 
 	$counter_new = 0;
 	
@@ -30,6 +9,7 @@
 	// https://extratorrent.unblockall.xyz/download/5267829/Jason.Bourne.2016.720p.WEBRip.x264.AAC-ETRG.torrent
 	$et_tv = convert('https://extratorrent.one/rss.xml?type=popular&cid=8');
 	$et_movies = convert('https://extratorrent.one/rss.xml?type=hot&cat=H264+X264');
+	$et_movies_divx = convert('http://extratorrent.cc/rss.xml?type=hot&cat=XVID+DIVX');
 	$yify = convert('https://yts.ag/rss');
 	$seen = json_decode(file_get_contents('seen.txt'), TRUE);
 	// print '<pre>'; 
@@ -76,7 +56,7 @@
 				print '<span class="glyphicon glyphicon-star-empty"></span> ';
 				$counter_new++;
 			} 
-			print clean($et_tv_item['link']);
+			print clean($et_tv_item['link'], 1);
 			print '</label></div>';
 			// print $eztv_item['title'];
 			// print $eztv_item['enclosure']['@attributes']['url'];
@@ -103,8 +83,8 @@
 				print '<span class="glyphicon glyphicon-star-empty"></span> ';
 				$counter_new++;
 			} 
-			print '<a href="' . 'http://www.imdb.com/find?ref_=nv_sr_fn&q=' . clean(str_replace(array("720p","1080p"), "", clean($yify_item['guid']))) . '" class="btn btn-warning" target="_blank">IMDB</a>';
-			print clean($yify_item['guid']);
+			print '<a href="' . 'http://www.imdb.com/find?ref_=nv_sr_fn&q=' . clean(str_replace(array("720p","1080p"), "", clean($yify_item['guid'], 0)), 0) . '" class="btn btn-warning" target="_blank">IMDB</a>';
+			print clean($yify_item['guid'], 0);
 			// print $eztv_item['title'];
 			// print $eztv_item['enclosure']['@attributes']['url'];
 			print '</label></div>';
@@ -116,7 +96,7 @@
 	// print_r($et_movies);
 	// print '</pre>';
 
-	print '<h2>ExtraTorrent Movies</h2>';
+	print '<h2>ExtraTorrent Movies H264</h2>';
 	print '<ul class="list-unstyled">';
 	$new = true;
 		foreach($et_movies['channel']['item'] as $et_movie){
@@ -130,7 +110,33 @@
 				print '<span class="glyphicon glyphicon-star-empty"></span> ';
 				$counter_new++;
 			}
-			print clean($et_movie['guid']);
+			print '<a href="' . 'http://www.imdb.com/find?ref_=nv_sr_fn&q=' . clean(str_replace(array("720p","1080p"), "", clean($et_movie['guid'], 1)), 0) . '" class="btn btn-warning" target="_blank">IMDB</a>';
+
+			print clean($et_movie['guid'], 1);
+			// print $eztv_item['title'];
+			// print $eztv_item['enclosure']['@attributes']['url'];
+			print '</label></div>';
+			print '</li>';
+		}
+	print '</ul>';
+
+	print '<h2>ExtraTorrent Movies DIVX</h2>';
+	print '<ul class="list-unstyled">';
+	$new = true;
+		foreach($et_movies_divx['channel']['item'] as $et_movie){
+			if($seen['et_movies_divx'] === $et_movie['enclosure']['@attributes']['url']) {
+				$new = false;
+			}
+			print '<li>';
+			print '<div class="checkbox"><label>';
+			print '<input type="checkbox" name="torrent[]" value="' . fix_et_link($et_movie['enclosure']['@attributes']['url']) .'">';
+			if($new == true) {
+				print '<span class="glyphicon glyphicon-star-empty"></span> ';
+				$counter_new++;
+			}
+			print '<a href="' . 'http://www.imdb.com/find?ref_=nv_sr_fn&q=' . clean(str_replace(array("720p","1080p"), "", clean($et_movie['guid'], 1)), 0) . '" class="btn btn-warning" target="_blank">IMDB</a>';
+
+			print clean($et_movie['guid'], 1);
 			// print $eztv_item['title'];
 			// print $eztv_item['enclosure']['@attributes']['url'];
 			print '</label></div>';
@@ -163,6 +169,7 @@
 	// store seen in array
 	$now_seen = array(
 				'et_movies' => $et_movies['channel']['item'][0]['enclosure']['@attributes']['url'], 
+				'et_movies_divx' => $et_movies_divx['channel']['item'][0]['enclosure']['@attributes']['url'], 
 				'yify' => $yify['channel']['item'][0]['enclosure']['@attributes']['url'],
 				'et_tv' => $et_tv['channel']['item'][0]['enclosure']['@attributes']['url'],
 				'eztv' => $eztv['channel']['item'][0]['enclosure']['@attributes']['url']
