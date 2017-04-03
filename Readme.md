@@ -23,8 +23,9 @@ Point your Torrent client's listening directory to ```/aRSSe/torrents```
 
 End of Transmission's settings.json
 ```
-"watch-dir": "/var/www/html/aRSSe/torrents",
-"watch-dir-enabled": true
+"watch-dir-enabled": true,
+"watch-dir": "/var/www/html/aRSSe/torrents"
+
 ```
 
 ### Get latest version (over-write local)
