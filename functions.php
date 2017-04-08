@@ -35,7 +35,15 @@ function convert($url) {
 			"x264", 
 			"DTS", 
 			"BluRay", 
-			"WEBRip");
+			"WEBRip",
+			"WEB",
+			"DL",
+			"X264",
+			"5D",
+			"5BEtHD",
+			"FGT",
+			"DD5",
+			"H264");
 		$pretty = str_replace($ugly, " ", $string);
 		if($cut == TRUE) {
 			$pretty = cut_front($pretty);
