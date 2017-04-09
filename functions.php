@@ -1,11 +1,15 @@
 <?php
 
 function convert($url) {
-		$feed = implode(file($url));
-		$xml = simplexml_load_string($feed);
-		$json = json_encode($xml);
-		$array = json_decode($json,TRUE);
-		return $array;
+		$feed = @implode(file($url));
+		if($feed !== null){
+			$xml = simplexml_load_string($feed);
+			$json = json_encode($xml);
+			$array = json_decode($json,TRUE);
+			return $array;
+		} else {
+			return 'Error!';
+		}
 	}
 
 	function clean($string, $cut) {
@@ -43,7 +47,9 @@ function convert($url) {
 			"5BEtHD",
 			"FGT",
 			"DD5",
-			"H264");
+			"H264",
+			"480p",
+			"BDRip");
 		$pretty = str_replace($ugly, " ", $string);
 		if($cut == TRUE) {
 			$pretty = cut_front($pretty);
@@ -63,6 +69,36 @@ function convert($url) {
 		$new_url = 'https://extratorrent.one';
 		$fixed = str_replace($old_url, $new_url, $url_to_fix);
 		return $fixed;
+	}
+
+	function p_filter($string) {
+		// remove 720p and 1080p from string
+		$result = str_replace(['720p', '1080p'], "", $string);
+		return $result;
+	}
+
+	function omdb_split($torrent_name) {
+		$torrent_name = p_filter($torrent_name);
+		$name = preg_replace('/\s+/', ' ',$torrent_name);
+		$pieces = explode(" ", $name);
+		$pieces = array_filter($pieces);
+		$number = count($pieces);
+		$pieces_start = key($pieces);
+		$pieces_end = @end(array_keys($pieces));
+		// var_dump($pieces);
+		$title = "";
+		for ($i= $pieces_start; $i < $pieces_end; $i++) { 
+			if($i == $pieces_start){
+				$title = $title . $pieces[$i];
+			} else {
+				$title = $title . '+' . $pieces[$i];
+			}	
+		}
+		$year = $pieces[$number];
+		// build local omdb url for omdb.php
+		$omdb_base = "omdb.php?";
+		$omdb_url = $omdb_base . 'title=' . $title .'&year=' . $year;
+		return $omdb_url;
 	}
 
 ?>
