@@ -81,3 +81,9 @@ li:nth-child(even) {
     -webkit-hyphens: auto;
     hyphens: auto;
 }
+
+/*Make the modal body scrollable*/
+.modal-body {
+    max-height: calc(100vh - 212px);
+    overflow-y: auto;
+}

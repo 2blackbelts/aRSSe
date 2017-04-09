@@ -36,5 +36,5 @@
 		}
 		echo '<strong>Plot: </strong>' . $omdb->Plot;
 		echo '<br>';
-		echo '<img src="' . $omdb->Poster . '"><br>';
+		echo '<img src="' . $omdb->Poster . '" class="img-responsive"><br>';
 	}
