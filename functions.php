@@ -64,13 +64,6 @@ function convert($url) {
 		return $clean;
 	}
 
-	function fix_et_link($url_to_fix) {
-		$old_url = 'http://extratorrent.cc';
-		$new_url = 'https://extratorrent.one';
-		$fixed = str_replace($old_url, $new_url, $url_to_fix);
-		return $fixed;
-	}
-
 	function p_filter($string) {
 		// remove 720p and 1080p from string
 		$result = str_replace(['720p', '1080p'], "", $string);

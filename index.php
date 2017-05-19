@@ -38,19 +38,6 @@
 
 <div class="realm">
 	<div class="container">
-		<!-- Yify search -->
-		<div class="col-lg-12">
-			<div class="yify-search">
-				<form id="yify-search" class="form-inline">
-					<div class="input-group">
-						<input type="text" id="yify-term" class="form-control" placeholder="Search Yify" autofocus>
-						<span class="input-group-btn">
-						<a href="#" id="yify-go" class="btn btn-primary"><span class="glyphicon glyphicon-search" aria-hidden="true"></span> YIFY Search</a>
-						</span>
-					</div>
-				</form>
-			</div>
-		</div>
 		<!-- EZTV Search -->
 		<div class="col-lg-12">
 			<div class="eztv-search">
@@ -64,32 +51,21 @@
 				</form>
 			</div>
 		</div>
-		<!-- ettv Search -->
+		
+		<!-- Yify search -->
 		<div class="col-lg-12">
-			<div class="ettv-search">
-				<form id="ettv-search" class="form-inline">
+			<div class="yify-search">
+				<form id="yify-search" class="form-inline">
 					<div class="input-group">
-						<input type="text" id="ettv-term" class="form-control" placeholder="Search ExtraTorrent">
+						<input type="text" id="yify-term" class="form-control" placeholder="Search Yify" autofocus>
 						<span class="input-group-btn">
-						<a href="#" id="ettv-go" class="btn btn-danger"><span class="glyphicon glyphicon-search" aria-hidden="true"></span> ExtraTorrent Search</a>
+						<a href="#" id="yify-go" class="btn btn-warning"><span class="glyphicon glyphicon-search" aria-hidden="true"></span> YIFY Search</a>
 						</span>
 					</div>
 				</form>
 			</div>
 		</div>
-		<!-- tpb Search -->
-		<!-- <div class="col-lg-12">
-			<div class="tpb-search">
-				<form id="tpb-search" class="form-inline">
-					<div class="input-group">
-						<input type="text" id="tpb-term" class="form-control" placeholder="Search TPB">
-						<span class="input-group-btn">
-						<a href="#" id="tpb-go" class="btn btn-warning"><span class="glyphicon glyphicon-search" aria-hidden="true"></span> TPB Search</a>
-						</span>
-					</div>
-				</form>
-			</div>
-		</div> -->
+		
 	</div>
 </div>
 	<script type="text/javascript">
@@ -146,41 +122,6 @@
 			});
 		});
 
-		$("#ettv-go").click(function(e){
-			e.preventDefault();
-			$("#ettv-go").addClass('disabled');
-			$("#ettv-go").text('Searching...');
-			var etterm = $("#ettv-term").val();
-			$.get( 'ettv.php?searched=' + etterm, function( data ) {
-			  $( ".ettv" ).html( data ).fadeIn();
-			  $("#ettv-go").removeClass('disabled');
-			  $("#ettv-go").html('<span class="glyphicon glyphicon-search" aria-hidden="true"></span> ExtraTorrent Search');
-			  // alert( "Load was performed." );
-			  // $(".se-pre-con").hide();
-			})
-			.fail(function() {
-			    alert( "Failed to run ExtraTorrent. Please try again." );
-			    // $(".se-pre-con").hide();
-			});
-		});
-
-		// $("#tpb-go").click(function(e){
-		// 	e.preventDefault();
-		// 	$("#tpb-go").addClass('disabled');
-		// 	$("#tpb-go").text('Searching...');
-		// 	var tpbterm = $("#tpb-term").val();
-		// 	$.get( 'tpb.php?searched=' + tpbterm, function( data ) {
-		// 	  $( ".tpb" ).html( data ).fadeIn();
-		// 	  $("#tpb-go").removeClass('disabled');
-		// 	  $("#tpb-go").html('<span class="glyphicon glyphicon-search" aria-hidden="true"></span> TPB Search');
-		// 	  // alert( "Load was performed." );
-		// 	  // $(".se-pre-con").hide();
-		// 	})
-		// 	.fail(function() {
-		// 	    alert( "Failed to run TPB. Please try again." );
-		// 	    // $(".se-pre-con").hide();
-		// 	});
-		// });
 	</script>
 
 	<script type="text/javascript">
