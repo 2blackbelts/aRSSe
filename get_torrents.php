@@ -7,6 +7,7 @@
 	
 	$eztv = convert('https://eztv.ag/ezrss.xml');
 	$yify = convert('https://yts.ag/rss');
+	$showRSS = convert('https://showrss.info/other/all.rss');
 	$seen = json_decode(file_get_contents('seen.txt'), TRUE);
 	$error = 'Error!';
 	// print '<pre>'; 
@@ -60,9 +61,41 @@
 					print '<span class="glyphicon glyphicon-star-empty"></span> ';
 					$counter_new++;
 				} 
-				print '<a href="' . omdb_split(clean($yify_item['guid'], 0)) . '" data-remote="false" data-toggle="modal" data-target="#myModal" class="btn btn-warning">Info</a>';
-				// print '<a href="' . 'http://www.imdb.com/find?ref_=nv_sr_fn&q=' . clean(str_replace(array("720p","1080p"), "", clean($yify_item['guid'], 0)), 0) . '" class="btn btn-warning" target="_blank">IMDB</a>';
+				// print '<a href="' . omdb_split(clean($yify_item['guid'], 0)) . '" data-remote="false" data-toggle="modal" data-target="#myModal" class="btn btn-warning">Info</a>';
+				print '<a href="' . 'http://www.imdb.com/find?ref_=nv_sr_fn&q=' . clean(str_replace(array("720p","1080p"), "", clean($yify_item['guid'], 0)), 0) . '" class="btn btn-warning" target="_blank">IMDB</a>';
 				print clean($yify_item['guid'], 0);
+				// print $eztv_item['title'];
+				// print $eztv_item['enclosure']['@attributes']['url'];
+				print '</label></div>';
+				print '</li>';
+			}
+		print '</ul>';
+	}
+
+	// print '<pre>'; 
+	// print_r($showRSS);
+	// print '</pre>';
+
+	print '<h2>Show RSS</h2>';
+	if($showRSS == $error){
+		echo 'ShowRSS is being stingy right now!';
+	} else {
+		print '<ul class="list-unstyled">';
+		$new = true;
+			foreach($showRSS['channel']['item'] as $showRSS_item){
+				if($seen['showRSS'] === $showRSS_item['enclosure']['@attributes']['url']) {
+					$new = false;
+				}
+				print '<li>';
+				print '<div class="checkbox"><label>';
+				print '<input type="checkbox" name="torrent[]" value="' . $showRSS_item['enclosure']['@attributes']['url'] .'">';
+				if($new == true) {
+					print '<span class="glyphicon glyphicon-star-empty"></span> ';
+					$counter_new++;
+				} 
+				// print '<a href="' . omdb_split(clean($yify_item['guid'], 0)) . '" data-remote="false" data-toggle="modal" data-target="#myModal" class="btn btn-warning">Info</a>';
+				// print '<a href="' . 'http://www.imdb.com/find?ref_=nv_sr_fn&q=' . clean(str_replace(array("720p","1080p"), "", clean($yify_item['guid'], 0)), 0) . '" class="btn btn-warning" target="_blank">IMDB</a>';
+				print clean($showRSS_item['title'], 0);
 				// print $eztv_item['title'];
 				// print $eztv_item['enclosure']['@attributes']['url'];
 				print '</label></div>';
@@ -97,7 +130,8 @@
 
 		$now_seen = array(
 					'yify' => $yify['channel']['item'][0]['enclosure']['@attributes']['url'],
-					'eztv' => $eztv['channel']['item'][0]['enclosure']['@attributes']['url']
+					'eztv' => $eztv['channel']['item'][0]['enclosure']['@attributes']['url'],
+					'showRSS' => $showRSS['channel']['item'][0]['enclosure']['@attributes']['url']
 					); 
 		// print_r($now_seen);
 		file_put_contents('seen.txt', json_encode($now_seen));

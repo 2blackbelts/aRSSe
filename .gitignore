@@ -1,5 +1,3 @@
-#ignore any downloaded torrent files
-torrents/*
+# ignore changes to settings after default
+includes/settings.php
 
-# Keep torrent folder in repo
-!torrents/.gitkeep 

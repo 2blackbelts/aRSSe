@@ -1,3 +1,5 @@
+<?php require 'includes/settings.php'; ?>
+
 <html>
 <head>
 	<meta charset="utf-8">
@@ -17,11 +19,20 @@
 				// print_r($_POST);
 				
 				$torrents = $_POST['torrent'];
+				// Loop through torrents and run ssh command to transmission
 				foreach ($torrents as $torrent) {
-					print '<p>Added: ' . $torrent . ' </p>';
-					file_put_contents("torrents/" . time() . ' - ' . mt_rand(1,1000) . ".torrent", fopen($torrent, 'r'));
+					$command = 'transmission-remote -a ' . $torrent;
+					$stream = ssh2_exec($connection, $command);
+					stream_set_blocking($stream, true);
+					$stream_out = ssh2_fetch_stream($stream, SSH2_STREAM_STDIO);
+					echo '<br>' . $torrent . '<br>';
+					echo '<strong>' . stream_get_contents($stream_out) . '</strong>';
+
+					// print '<p>Added: ' . $torrent . ' </p>';
+					// file_put_contents("torrents/" . time() . ' - ' . mt_rand(1,1000) . ".torrent", fopen($torrent, 'r'));
 					// sleep(1);
 				}
+				ssh2_exec($connection, 'logout');
 			}
 		?>
 

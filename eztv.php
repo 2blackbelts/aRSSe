@@ -53,7 +53,7 @@
 		foreach ($html_base->find("tr[class='forum_header_border']") as $element) {
 			print '<li>';
 			print '<div class="checkbox"><label>';
-			print '<input type="checkbox" name="torrent[]" value="' . $element->children(2)->children(1)->attr['href'] .'">';
+			print '<input type="checkbox" name="torrent[]" value="' . $element->children(2)->children(0)->attr['href'] .'">';
 			
 			print '<span class="glyphicon glyphicon-search"></span> ';
 			
