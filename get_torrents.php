@@ -104,6 +104,43 @@
 		print '</ul>';
 	}
 
+	print '<h2>Popcorntime Movies 1080p</h2>';
+	try {
+		$pct_url = file_get_contents('https://tv-v2.api-fetch.website/movies/1?sort=last%20added');
+		$pct_result = json_decode($pct_url);
+
+		// var_dump($result);
+
+		print '<ul class="list-unstyled">';
+
+		$new = true;
+		foreach ($pct_result as $movie) {
+			if($seen['pct_movie'] === $movie->torrents->en->{'1080p'}->url) {
+					$new = false;
+				}
+			// print $movie->title . '<br>';
+			
+			print '<li>';
+				print '<div class="checkbox"><label>';
+				print '<input type="checkbox" name="torrent[]" value="' . $movie->torrents->en->{'1080p'}->url .'">';	
+
+				if($new == true) {
+					print '<span class="glyphicon glyphicon-star-empty"></span> ';
+					$counter_new++;
+				} 	
+				
+				print $movie->title . " " . $movie->year;
+				print '</label></div>';
+				
+			print '</li>';
+			}
+
+		print '</ul>';
+	} catch (Exception $e) {
+		print 'Popcorntime is being stingy right now.';
+	}
+		
+
 
 	// show yify + EZTV + ettv search results here
 	print '<div class="yify"></div>';
@@ -131,7 +168,8 @@
 		$now_seen = array(
 					'yify' => $yify['channel']['item'][0]['enclosure']['@attributes']['url'],
 					'eztv' => $eztv['channel']['item'][0]['enclosure']['@attributes']['url'],
-					'showRSS' => $showRSS['channel']['item'][0]['enclosure']['@attributes']['url']
+					'showRSS' => $showRSS['channel']['item'][0]['enclosure']['@attributes']['url'],
+					'pct_movie' => $pct_result{0}->torrents->en->{'1080p'}->url
 					); 
 		// print_r($now_seen);
 		file_put_contents('seen.txt', json_encode($now_seen));

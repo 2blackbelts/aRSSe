@@ -1,7 +1,6 @@
 <?php
 $urls = array(
 	'eztv' => 'https://eztv.ag',
-	'ettv' => 'https://extratorrent.one',
 	'yify' => 'https://yts.ag'
 	);
 
