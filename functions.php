@@ -94,4 +94,17 @@ function convert($url) {
 		return $omdb_url;
 	}
 
+	function create_link_or_icon($ssh_is_true, $link, $type){
+		if($ssh_is_true == 1){
+			print '<input type="checkbox" name="torrent[]" value="' . $link .'">';
+		} else {
+			if($type == 'magnet'){
+				$icon = 'icon_magnet.png';
+			} else {
+				$icon = 'icon_download.gif';
+			}
+			print '<a href="' . $link . '"><img src="img/' . $icon . '"></a> ';
+		}
+	}
+
 ?>
