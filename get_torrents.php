@@ -31,6 +31,9 @@
 					print '<span class="glyphicon glyphicon-star-empty"></span> ';
 					$counter_new++;
 				} 
+
+				print '<a href="' . omdb_clean_tv($eztv_item['title']) . '" data-remote="false" data-toggle="modal" data-target="#myModal" class="btn btn-success">Info</a> ';
+
 				print $eztv_item['title'];
 				print '</label></div>';
 				// print $eztv_item['title'];
@@ -61,8 +64,8 @@
 					print '<span class="glyphicon glyphicon-star-empty"></span> ';
 					$counter_new++;
 				} 
-				// print '<a href="' . omdb_split(clean($yify_item['guid'], 0)) . '" data-remote="false" data-toggle="modal" data-target="#myModal" class="btn btn-warning">Info</a>';
-				print '<a href="' . 'http://www.imdb.com/find?ref_=nv_sr_fn&q=' . clean(str_replace(array("720p","1080p"), "", clean($yify_item['guid'], 0)), 0) . '" class="btn btn-warning" target="_blank">IMDB</a>';
+				print '<a href="' . omdb_split(clean($yify_item['guid'], 0), 0) . '" data-remote="false" data-toggle="modal" data-target="#myModal" class="btn btn-warning">Info</a>';
+				// print ' <a href="' . 'http://www.imdb.com/find?ref_=nv_sr_fn&q=' . clean(str_replace(array("720p","1080p"), "", clean($yify_item['guid'], 0)), 0) . '" class="btn btn-warning" target="_blank">IMDB</a>';
 				print clean($yify_item['guid'], 0);
 				// print $eztv_item['title'];
 				// print $eztv_item['enclosure']['@attributes']['url'];
@@ -93,7 +96,7 @@
 					print '<span class="glyphicon glyphicon-star-empty"></span> ';
 					$counter_new++;
 				} 
-				// print '<a href="' . omdb_split(clean($yify_item['guid'], 0)) . '" data-remote="false" data-toggle="modal" data-target="#myModal" class="btn btn-warning">Info</a>';
+				print '<a href="' . omdb_clean_tv(clean($showRSS_item['title'], 0)) . '" data-remote="false" data-toggle="modal" data-target="#myModal" class="btn btn-danger">Info</a> ';
 				// print '<a href="' . 'http://www.imdb.com/find?ref_=nv_sr_fn&q=' . clean(str_replace(array("720p","1080p"), "", clean($yify_item['guid'], 0)), 0) . '" class="btn btn-warning" target="_blank">IMDB</a>';
 				print clean($showRSS_item['title'], 0);
 				// print $eztv_item['title'];
@@ -128,7 +131,8 @@
 					print '<span class="glyphicon glyphicon-star-empty"></span> ';
 					$counter_new++;
 				} 	
-				
+				print '<a href="' . omdb_split(clean($movie->title . " " . $movie->year . " 1080p", 0), 1) . '" data-remote="false" data-toggle="modal" data-target="#myModal" class="btn btn-info">Info</a> ';
+
 				print $movie->title . " " . $movie->year;
 				print '</label></div>';
 				

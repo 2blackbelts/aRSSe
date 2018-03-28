@@ -7,10 +7,10 @@ $OMDB_API_KEY = '';
 // Installation details: http://php.net/manual/en/ssh2.installation.php
 
 // SSH login details
-$SSH_USERNAME = '';
-$SSH_PASSWORD = '';
+$SSH_USERNAME = 'saim';
+$SSH_PASSWORD = 'unity786';
 $SSH_PORT = 22; //default 22
-$SSH_IP = '';  //192.168.1.20
+$SSH_IP = '192.168.0.5';  //192.168.1.20
 
 // Attempt connection
 try {

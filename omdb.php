@@ -6,7 +6,10 @@
 	$title = urlencode($_GET['title']);
 	$year = urlencode($_GET['year']);
 
-	$json = file_get_contents("http://www.omdbapi.com/?t=$title&y=$year");
+	if(empty($year)){
+		$json = file_get_contents("http://www.omdbapi.com/?t=$title&apikey=86c17b6f");
+	}
+	$json = file_get_contents("http://www.omdbapi.com/?t=$title&y=$year&apikey=86c17b6f");
 	$omdb = json_decode($json);
 	
 	if ($debug_mode === TRUE) {

@@ -15,6 +15,7 @@ function convert($url) {
 	function clean($string, $cut) {
 		// list of ugly torrent names to hide
 		$ugly = array(
+			"https://yts.am/movie",
 			"http://extratorrent.cc/torrent",
 			"https://extra.to/torrent",
 			"https://eztv.ag/movie",
@@ -70,7 +71,7 @@ function convert($url) {
 		return $result;
 	}
 
-	function omdb_split($torrent_name) {
+	function omdb_split($torrent_name, $popcorn_offset) {
 		$torrent_name = p_filter($torrent_name);
 		$name = preg_replace('/\s+/', ' ',$torrent_name);
 		$pieces = explode(" ", $name);
@@ -87,11 +88,33 @@ function convert($url) {
 				$title = $title . '+' . $pieces[$i];
 			}	
 		}
-		$year = $pieces[$number];
+		if($popcorn_offset == 1)
+		{
+			// year of movie is last array item less 1
+			$year = $pieces[$number -1];
+		} 
+		else {
+			// year of movie is last array item
+			$year = $pieces[$number];
+		}
+		
 		// build local omdb url for omdb.php
 		$omdb_base = "omdb.php?";
 		$omdb_url = $omdb_base . 'title=' . $title .'&year=' . $year;
 		return $omdb_url;
 	}
+
+	function omdb_clean_tv($filename) {
+		// split TV show name before and after episode details - take first part
+		$find_show = preg_split('/([S]\d\d[E]\d\d)+/', $filename);
+		// if show is not split as S01E13 is actually written 1x13
+		if(count($find_show)==1) {
+			$find_show = preg_split('/(\d[x]\d\d)+/', $filename);
+		}
+		$show_plus = preg_replace('/(\s)+/', '+', trim($find_show[0]));
+		$omdb_base = "omdb.php?";
+		$omdb_url = $omdb_base . 'title=' . $show_plus . '&year=';
+		return $omdb_url;
+}
 
 ?>
