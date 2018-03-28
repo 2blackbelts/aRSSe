@@ -1,6 +1,7 @@
 <h2>EZTV Search</h2>
 <?php
 	include_once('simplehtmldom_1_5/simple_html_dom.php');
+	include 'functions.php';
 
 		$term = $_GET['searched'];
 		// $term = preg_replace("/[\s_]/", "-", $term);
@@ -53,7 +54,10 @@
 		foreach ($html_base->find("tr[class='forum_header_border']") as $element) {
 			print '<li>';
 			print '<div class="checkbox"><label>';
-			print '<input type="checkbox" name="torrent[]" value="' . $element->children(2)->children(0)->attr['href'] .'">';
+
+			create_link_or_icon($ssh_is_true, $element->children(2)->children(0)->attr['href'], 'magnet');
+
+			// print '<input type="checkbox" name="torrent[]" value="' . $element->children(2)->children(0)->attr['href'] .'">';
 			
 			print '<span class="glyphicon glyphicon-search"></span> ';
 			

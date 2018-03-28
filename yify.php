@@ -1,6 +1,8 @@
 <h2>Yify Search</h2>
 
 <?php
+	include 'functions.php';
+
 	$term = $_GET['searched'];
 	$term = str_replace(" ", "%20", $term);
 	// echo $say;
@@ -36,7 +38,8 @@
 		
 		print '<li>';
 			print '<div class="checkbox"><label>';
-			print '<input type="checkbox" name="torrent[]" value="' . $best .'">';
+			create_link_or_icon($ssh_is_true, $best, 'magnet');
+			// print '<input type="checkbox" name="torrent[]" value="' . $best .'">';
 			
 			print '<span class="glyphicon glyphicon-search"></span> ';
 			

@@ -26,7 +26,10 @@
 				}
 				print '<li>';
 				print '<div class="checkbox"><label>';
-				print '<input type="checkbox" name="torrent[]" value="' . $eztv_item['enclosure']['@attributes']['url'] .'">';
+
+				create_link_or_icon($ssh_is_true, $eztv_item['enclosure']['@attributes']['url'], 'download');
+				
+				
 				if($new == true) {
 					print '<span class="glyphicon glyphicon-star-empty"></span> ';
 					$counter_new++;
@@ -59,7 +62,9 @@
 				}
 				print '<li>';
 				print '<div class="checkbox"><label>';
-				print '<input type="checkbox" name="torrent[]" value="' . $yify_item['enclosure']['@attributes']['url'] .'">';
+
+				create_link_or_icon($ssh_is_true, $yify_item['enclosure']['@attributes']['url'], 'download');
+
 				if($new == true) {
 					print '<span class="glyphicon glyphicon-star-empty"></span> ';
 					$counter_new++;
@@ -91,7 +96,9 @@
 				}
 				print '<li>';
 				print '<div class="checkbox"><label>';
-				print '<input type="checkbox" name="torrent[]" value="' . $showRSS_item['enclosure']['@attributes']['url'] .'">';
+
+				create_link_or_icon($ssh_is_true, $showRSS_item['enclosure']['@attributes']['url'], 'magnet');
+
 				if($new == true) {
 					print '<span class="glyphicon glyphicon-star-empty"></span> ';
 					$counter_new++;
@@ -125,7 +132,8 @@
 			
 			print '<li>';
 				print '<div class="checkbox"><label>';
-				print '<input type="checkbox" name="torrent[]" value="' . $movie->torrents->en->{'1080p'}->url .'">';	
+
+				create_link_or_icon($ssh_is_true, $movie->torrents->en->{'1080p'}->url, 'magnet');
 
 				if($new == true) {
 					print '<span class="glyphicon glyphicon-star-empty"></span> ';
@@ -151,10 +159,14 @@
 	print '<div class="eztv"></div>';
 	print '<div class="counter-new">' . $counter_new . '</div>';
 
-// file_put_contents("torrents/" . date('Ymd') . ".torrent", fopen("https://zoink.ch/torrent/Ancient.Aliens.S11E14.The.Returned.720p.HDTV.x264-DHD[eztv].mkv.torrent", 'r'));
+// show Add Torrent button only if SSH is active
+if($ssh_is_true == 1){
+	print '<button type="submit" class="btn btn-lg btn-success" id="cmdSubmit" name="cmdSubmit" value="Add Torrents" data-loading-text="Adding..." autocomplete="off">Add Torrents</button>';
+} 
 
 ?>
-<button type="submit" class="btn btn-lg btn-success" id="cmdSubmit" name="cmdSubmit" value="Add Torrents" data-loading-text="Adding..." autocomplete="off">Add Torrents</button>
+
+
 </form>
 </div>
 
