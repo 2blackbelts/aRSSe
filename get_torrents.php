@@ -157,6 +157,7 @@
 	// show yify + EZTV + ettv search results here
 	print '<div class="yify"></div>';
 	print '<div class="eztv"></div>';
+	print '<div class="showrss"></div>';
 	print '<div class="counter-new">' . $counter_new . '</div>';
 
 // show Add Torrent button only if SSH is active

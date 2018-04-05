@@ -29,7 +29,7 @@
 	</style>
 </head>
 <body>
-	
+
 	<div class="counter-tick">0</div>
 
 	<div class="se-pre-con"></div>
@@ -46,7 +46,7 @@
 			<div class="eztv-search">
 				<form id="eztv-search" class="form-inline">
 					<div class="input-group">
-						<input type="text" id="eztv-term" class="form-control" placeholder="Search EZTV">
+						<input type="text" id="eztv-term" class="form-control" placeholder="Search EZTV" autofocus>
 						<span class="input-group-btn">
 						<a href="#" id="eztv-go" class="btn btn-info"><span class="glyphicon glyphicon-search" aria-hidden="true"></span> EZTV Search</a>
 						</span>
@@ -60,7 +60,7 @@
 			<div class="yify-search">
 				<form id="yify-search" class="form-inline">
 					<div class="input-group">
-						<input type="text" id="yify-term" class="form-control" placeholder="Search Yify" autofocus>
+						<input type="text" id="yify-term" class="form-control" placeholder="Search Yify">
 						<span class="input-group-btn">
 						<a href="#" id="yify-go" class="btn btn-warning"><span class="glyphicon glyphicon-search" aria-hidden="true"></span> YIFY Search</a>
 						</span>
@@ -68,7 +68,25 @@
 				</form>
 			</div>
 		</div>
-		
+		<!-- showRSS search -->
+		<div class="col-lg-12">
+			<div class="showrss-search">
+				<form id="showrss-search" class="form-inline">
+					<div class="input-group">
+						 <!-- <label for="showrss-term">Find a TV Show:</label> -->
+						  <select class="form-control" id="showrss-term">
+						  	<option value="all" disabled selected>Select a show</option>
+						    <?php 
+						    	include('includes/showRSSlist.php');
+						    ?>
+						  </select>
+						<span class="input-group-btn">
+						<a href="" id="showrss-go" class="btn btn-danger"><span class="glyphicon glyphicon-search" aria-hidden="true"></span> ShowRSS Search</a>
+						</span>
+					</div>
+				</form>
+			</div>
+		</div>
 	</div>
 </div>
 	<script type="text/javascript">
@@ -121,6 +139,25 @@
 			})
 			.fail(function() {
 			    alert( "Failed to run EZTV. Please try again." );
+			    // $(".se-pre-con").hide();
+			});
+		});
+
+		$("#showrss-go").click(function(e){
+			e.preventDefault();
+			$("#showrss-go").addClass('disabled');
+			$("#showrss-go").text('Searching...');
+			var showrss = $("#showrss-term").val();
+			$.get( 'showRSS.php?id=' + showrss, function( data ) {
+			  $( ".showrss" ).html( data ).fadeIn();
+			  $("#showrss-go").removeClass('disabled');
+  			  $("#showrss-go").html('<span class="glyphicon glyphicon-search" aria-hidden="true"></span> ShowRSS Search');
+
+			  // alert( "Load was performed." );
+			  // $(".se-pre-con").hide();
+			})
+			.fail(function() {
+			    alert( "Failed to run ShowRSS. Please try again." );
 			    // $(".se-pre-con").hide();
 			});
 		});
