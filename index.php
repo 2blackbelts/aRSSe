@@ -38,6 +38,9 @@
 
 <div class="realm">
 	<div class="container">
+		<div class="alert alert-info" role="alert">
+		  Please click the search buttons. Don't use ENTER.
+		</div>
 		<!-- EZTV Search -->
 		<div class="col-lg-12">
 			<div class="eztv-search">

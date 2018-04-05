@@ -1,7 +1,7 @@
 <?php
 
-// set to 0 for magnet links to show as icons (manual download)
-$ssh_is_true = 1;
+// set to 0 for magnet links to show as icons (manual download) [default 0 for live site]
+$ssh_is_true = 0;
 
 function convert($url) {
 		$feed = @implode(file($url));
