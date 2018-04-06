@@ -172,9 +172,9 @@
 		
 
 
-	// show yify + EZTV + ettv search results here
-	print '<div class="yify"></div>';
+	// show yify + EZTV + showRSS search results here
 	print '<div class="eztv"></div>';
+	print '<div class="yify"></div>';
 	print '<div class="showrss"></div>';
 	print '<div class="counter-new">' . $counter_new . '</div>';
 
