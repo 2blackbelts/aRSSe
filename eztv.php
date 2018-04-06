@@ -61,7 +61,12 @@
 			
 			print '<span class="glyphicon glyphicon-search"></span> ';
 			
-			print $element->children(1)->children(0)->attr['title'];
+			create_link_or_label(
+				$ssh_is_true,
+				$element->children(1)->children(0)->attr['title'],
+				$element->children(2)->children(0)->attr['href']
+				);
+			// print $element->children(1)->children(0)->attr['title'];
 			print '</label></div>';
 			
 			print '</li>';

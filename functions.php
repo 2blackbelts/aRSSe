@@ -133,4 +133,13 @@ function convert($url) {
 		}
 	}
 
+	// creates a clickable magnet link for the name of the torrent is SSH is false
+	function create_link_or_label($ssh_is_true, $title, $link){
+		if($ssh_is_true == 0) {
+			print '<a href="' . $link . '" class="colour-links">' . $title . '</a>';
+		} else {
+			print $title;
+		}
+	}
+
 ?>

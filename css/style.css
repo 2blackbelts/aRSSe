@@ -58,11 +58,11 @@ li {
     color: black;
 }
 
-li:nth-child(odd) {
+li:nth-child(odd), li:nth-child(odd) a.colour-links {
     color: #a94442;
 }
 
-li:nth-child(even) {
+li:nth-child(even), li:nth-child(even) a.colour-links {
     color: #333;
 }
 

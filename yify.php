@@ -43,7 +43,13 @@
 			
 			print '<span class="glyphicon glyphicon-search"></span> ';
 			
-			print $movie->title . " " . $movie->year;
+			// print $movie->title . " " . $movie->year;
+			create_link_or_label(
+				$ssh_is_true,
+				$movie->title . " " . $movie->year,
+				$best
+				);
+			
 			print '</label></div>';
 			
 		print '</li>';
