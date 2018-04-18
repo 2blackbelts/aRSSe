@@ -38,7 +38,12 @@
 		
 		print '<li>';
 			print '<div class="checkbox"><label>';
-			create_link_or_icon($ssh_is_true, $best, 'magnet');
+			create_link_or_icon(
+				$ssh_is_true, 
+				$best, 
+				'download', 
+				1
+			);
 			// print '<input type="checkbox" name="torrent[]" value="' . $best .'">';
 			
 			print '<span class="glyphicon glyphicon-search"></span> ';
@@ -47,8 +52,9 @@
 			create_link_or_label(
 				$ssh_is_true,
 				$movie->title . " " . $movie->year,
-				$best
-				);
+				$best,
+				1
+			);
 			
 			print '</label></div>';
 			

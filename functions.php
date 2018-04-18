@@ -120,23 +120,34 @@ function convert($url) {
 		return $omdb_url;
 }
 
-	function create_link_or_icon($ssh_is_true, $link, $type){
+	function create_link_or_icon($ssh_is_true, $link, $type, $bunny_hop_true){
 		if($ssh_is_true == 1){
 			print '<input type="checkbox" name="torrent[]" value="' . $link .'">';
 		} else {
+			// SSH is off
 			if($type == 'magnet'){
 				$icon = 'icon_magnet.png';
 			} else {
 				$icon = 'icon_download.gif';
 			}
-			print '<a href="' . $link . '"><img src="img/' . $icon . '"></a> ';
+			if($bunny_hop_true == 1) {
+				print '<a href="bunny_hop.php?url=' . $link . '" target="_blank"><img src="img/' . $icon . '"></a> ';
+			} else {
+				print '<a href="' . $link . '"><img src="img/' . $icon . '"></a> ';
+			}
+			
 		}
 	}
 
 	// creates a clickable magnet link for the name of the torrent is SSH is false
-	function create_link_or_label($ssh_is_true, $title, $link){
+	function create_link_or_label($ssh_is_true, $title, $link, $bunny_hop_true){
 		if($ssh_is_true == 0) {
-			print '<a href="' . $link . '" class="colour-links">' . $title . '</a>';
+			if($bunny_hop_true == 1){
+				print '<a href="bunny_hop.php?url=' . $link . '" target="_blank" class="colour-links">' . $title . '</a>';
+			} else {
+				print '<a href="' . $link . '" class="colour-links">' . $title . '</a>';
+			}
+			
 		} else {
 			print $title;
 		}

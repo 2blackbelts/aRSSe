@@ -27,7 +27,12 @@
 				print '<li>';
 				print '<div class="checkbox"><label>';
 
-				create_link_or_icon($ssh_is_true, $eztv_item['enclosure']['@attributes']['url'], 'download');
+				create_link_or_icon(
+					$ssh_is_true, 
+					$eztv_item['enclosure']['@attributes']['url'], 
+					'download', 
+					0
+				);
 				
 				
 				if($new == true) {
@@ -37,7 +42,12 @@
 
 				print '<a href="' . omdb_clean_tv($eztv_item['title']) . '" data-remote="false" data-toggle="modal" data-target="#myModal" class="btn btn-success">Info</a> ';
 
-				create_link_or_label($ssh_is_true, $eztv_item['title'], $eztv_item['enclosure']['@attributes']['url']);
+				create_link_or_label(
+					$ssh_is_true, 
+					$eztv_item['title'], 
+					$eztv_item['enclosure']['@attributes']['url'],
+					0
+				);
 				
 				// print $eztv_item['title'];
 				print '</label></div>';
@@ -65,7 +75,12 @@
 				print '<li>';
 				print '<div class="checkbox"><label>';
 
-				create_link_or_icon($ssh_is_true, $yify_item['enclosure']['@attributes']['url'], 'download');
+				create_link_or_icon(
+					$ssh_is_true, 
+					$yify_item['enclosure']['@attributes']['url'], 
+					'download', 
+					1
+					);
 
 				if($new == true) {
 					print '<span class="glyphicon glyphicon-star-empty"></span> ';
@@ -77,8 +92,9 @@
 				create_link_or_label(
 					$ssh_is_true, 
 					clean($yify_item['guid'], 0),
-					$yify_item['enclosure']['@attributes']['url']
-					);  
+					$yify_item['enclosure']['@attributes']['url'],
+					1
+				);  
 				
 				// print $eztv_item['title'];
 				// print $eztv_item['enclosure']['@attributes']['url'];
@@ -105,7 +121,12 @@
 				print '<li>';
 				print '<div class="checkbox"><label>';
 
-				create_link_or_icon($ssh_is_true, $showRSS_item['enclosure']['@attributes']['url'], 'magnet');
+				create_link_or_icon(
+					$ssh_is_true, 
+					$showRSS_item['enclosure']['@attributes']['url'], 
+					'magnet', 
+					0
+				);
 
 				if($new == true) {
 					print '<span class="glyphicon glyphicon-star-empty"></span> ';
@@ -116,7 +137,8 @@
 				create_link_or_label(
 					$ssh_is_true,
 					clean($showRSS_item['title'], 0),
-					$showRSS_item['enclosure']['@attributes']['url']
+					$showRSS_item['enclosure']['@attributes']['url'],
+					0
 				 );
 				// print clean($showRSS_item['title'], 0);
 				// print $eztv_item['title'];
@@ -146,7 +168,12 @@
 			print '<li>';
 				print '<div class="checkbox"><label>';
 
-				create_link_or_icon($ssh_is_true, $movie->torrents->en->{'1080p'}->url, 'magnet');
+				create_link_or_icon(
+					$ssh_is_true, 
+					$movie->torrents->en->{'1080p'}->url, 
+					'magnet', 
+					0
+					);
 
 				if($new == true) {
 					print '<span class="glyphicon glyphicon-star-empty"></span> ';
@@ -157,7 +184,8 @@
 				create_link_or_label(
 					$ssh_is_true, 
 					$movie->title . " " . $movie->year,
-					$movie->torrents->en->{'1080p'}->url
+					$movie->torrents->en->{'1080p'}->url,
+					0
 					);
 				// print $movie->title . " " . $movie->year;
 				print '</label></div>';

@@ -55,7 +55,12 @@
 			print '<li>';
 			print '<div class="checkbox"><label>';
 
-			create_link_or_icon($ssh_is_true, $element->children(2)->children(0)->attr['href'], 'magnet');
+			create_link_or_icon(
+				$ssh_is_true, 
+				$element->children(2)->children(0)->attr['href'], 
+				'magnet',
+				0
+			);
 
 			// print '<input type="checkbox" name="torrent[]" value="' . $element->children(2)->children(0)->attr['href'] .'">';
 			
@@ -64,8 +69,9 @@
 			create_link_or_label(
 				$ssh_is_true,
 				$element->children(1)->children(0)->attr['title'],
-				$element->children(2)->children(0)->attr['href']
-				);
+				$element->children(2)->children(0)->attr['href'],
+				0
+			);
 			// print $element->children(1)->children(0)->attr['title'];
 			print '</label></div>';
 			
