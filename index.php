@@ -29,7 +29,19 @@
 	</style>
 </head>
 <body>
-
+	<div class="container">
+		<div class="col-sm-12">
+			<div class="alert alert-info">
+			  Bunnyhop downloads now used for YIFY.
+			</div>
+		</div>
+		<div class="col-md-6 col-sm-12">
+			<div class="alert alert-warning">
+			  EZTV not working maybe?
+			</div>
+		</div>
+	</div>
+	
 	<div class="counter-tick">0</div>
 
 	<div class="se-pre-con"></div>
