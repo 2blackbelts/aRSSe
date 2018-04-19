@@ -35,9 +35,9 @@
 			  Bunnyhop downloads now used for YIFY.
 			</div>
 		</div>
-		<div class="col-md-6 col-sm-12">
-			<div class="alert alert-warning">
-			  EZTV not working maybe?
+		<div class="col-sm-12">
+			<div class="alert alert-info">
+			  Magnet links added to <strong>YIFY search</strong>. Please try them out.
 			</div>
 		</div>
 	</div>
