@@ -103,7 +103,7 @@ function convert($url) {
 		
 		// build local omdb url for omdb.php
 		$omdb_base = "omdb.php?";
-		$omdb_url = $omdb_base . 'title=' . $title .'&year=' . $year;
+		$omdb_url = $omdb_base . 'type=movie' . '&title=' . $title .'&year=' . $year;
 		return $omdb_url;
 	}
 
@@ -112,11 +112,15 @@ function convert($url) {
 		$find_show = preg_split('/([S]\d\d[E]\d\d)+/', $filename);
 		// if show is not split as S01E13 is actually written 1x13
 		if(count($find_show)==1) {
-			$find_show = preg_split('/(\d[x]\d\d)+/', $filename);
+			$find_show = preg_split('/(\d\d[x]\d\d)+/', $filename);
+			// if show is not split as 1x13 is actually written 01x13
+			if(count($find_show)==1) {
+				$find_show = preg_split('/(\d[x]\d\d)+/', $filename);
+			}
 		}
 		$show_plus = preg_replace('/(\s)+/', '+', trim($find_show[0]));
 		$omdb_base = "omdb.php?";
-		$omdb_url = $omdb_base . 'title=' . $show_plus . '&year=';
+		$omdb_url = $omdb_base . 'type=series' . '&title=' . $show_plus . '&year=';
 		return $omdb_url;
 }
 
