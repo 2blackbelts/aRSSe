@@ -53,7 +53,40 @@ function convert($url) {
 			"DD5",
 			"H264",
 			"480p",
-			"BDRip");
+			"BDRip",
+			"SiGMA[TGx]",
+			"CAFFEiNE[TGx]",
+			"GalaxyRG",
+			"CRiMSON[TGx]",
+			"KOMPOST[TGx]",
+			"h264",
+			"QPEL[TGx]",
+			"HEVC",
+			"Obey[TGx]",
+			"PLUTONiUM[TGx]",
+			"HDTV",
+			"W4F[TGx]",
+			"Star[TGx]",
+			"TBS[TGx]",
+			"AMZN",
+			"DDP2",
+			"264",
+			"WEB-DL",
+			"DDP2.0",
+			"H.264-SiGMA[TGx]",
+			"800MB",
+			"CHS[TGx]",
+			"[MOVCR]",
+			"ASSOCiATE[TGx]",
+			"B4ND1T69",
+			"FTP[TGx]",
+			"MARKSMAN[TGx]",
+			"LPD[TGx]",
+			"mSD[TGx]",
+			"CookieMonster[TGx]",
+			"NWCHD[TGx]"
+			);
+
 		$pretty = str_replace($ugly, " ", $string);
 		if($cut == TRUE) {
 			$pretty = cut_front($pretty);

@@ -160,7 +160,14 @@
 
 		$new = true;
 		foreach ($pct_result as $movie) {
-			if($seen['pct_movie'] === $movie->torrents->en->{'1080p'}->url) {
+			// make sure torrent has 1080p option - otherwise 720p
+			if (isset($movie->torrents->en->{'1080p'})) {
+				$pct_movie_url = $movie->torrents->en->{'1080p'}->url;
+			} else {
+				$pct_movie_url = $movie->torrents->en->{'720p'}->url;
+			}				
+			
+			if($seen['pct_movie'] === $pct_movie_url) {
 					$new = false;
 				}
 			// print $movie->title . '<br>';
@@ -170,7 +177,7 @@
 
 				create_link_or_icon(
 					$ssh_is_true, 
-					$movie->torrents->en->{'1080p'}->url, 
+					$pct_movie_url, 
 					'magnet', 
 					0
 					);
@@ -184,7 +191,7 @@
 				create_link_or_label(
 					$ssh_is_true, 
 					$movie->title . " " . $movie->year,
-					$movie->torrents->en->{'1080p'}->url,
+					$pct_movie_url,
 					0
 					);
 				// print $movie->title . " " . $movie->year;
@@ -197,6 +204,63 @@
 	} catch (Exception $e) {
 		print 'Popcorntime is being stingy right now.';
 	}
+
+	print '<h2>Torrent Galaxy (24hrs)</h2>';
+	try {
+		$tg_dump_file = file_get_contents("torrent-galaxy/clean.json");
+		$torrent_galaxy = json_decode($tg_dump_file, true);
+
+		// var_dump($torrent_galaxy);
+
+		print '<ul class="list-unstyled">';
+
+		$new = true;
+		foreach ($torrent_galaxy as $tg_item) {
+			if($seen['tg'] === $tg_item['magnet']) {
+					$new = false;
+				}
+			// print $movie->title . '<br>';
+			
+			print '<li>';
+				print '<div class="checkbox"><label>';
+
+				create_link_or_icon(
+					$ssh_is_true, 
+					$tg_item['magnet'], 
+					'magnet', 
+					0
+					);
+
+				if($new == true) {
+					print '<span class="glyphicon glyphicon-star-empty"></span> ';
+					$counter_new++;
+				} 	
+				if($tg_item['type'] == "TV") {
+					print '<a href="' . omdb_clean_tv(clean($tg_item['name'], 0)) . '" data-remote="false" data-toggle="modal" data-target="#myModal" class="btn btn-success">Info</a> ';
+
+				} else {
+					print '<a href="' . omdb_split(clean($tg_item['name'] . " 1080p", 0), 1) . '" data-remote="false" data-toggle="modal" data-target="#myModal" class="btn btn-success"><i class="glyphicon glyphicon-film"></i> Info</a> ';
+				}
+				
+
+				create_link_or_label(
+					$ssh_is_true, 
+					clean($tg_item['name'],0),
+					$tg_item['magnet'],
+					0
+					);
+				// print $movie->title . " " . $movie->year;
+				print '</label></div>';
+				
+			print '</li>';
+			}
+
+		print '</ul>';
+	} catch (Exception $e) {
+		print 'Torrent Galaxy Failed.';
+	}
+
+
 		
 
 
@@ -226,15 +290,16 @@ if($ssh_is_true == 1){
 </script>
 <?php 
 	// store seen in array if no errors occurred in loading torrents
-	if($yify !== $error && $eztv !== $error) {
+	// if($yify !== $error && $eztv !== $error) {
 
 		$now_seen = array(
 					'yify' => $yify['channel']['item'][0]['enclosure']['@attributes']['url'],
 					'eztv' => $eztv['channel']['item'][0]['enclosure']['@attributes']['url'],
 					'showRSS' => $showRSS['channel']['item'][0]['enclosure']['@attributes']['url'],
-					'pct_movie' => $pct_result{0}->torrents->en->{'1080p'}->url
+					'pct_movie' => $pct_result{0}->torrents->en->{'1080p'}->url,
+					'tg' => $torrent_galaxy[0]['magnet']
 					); 
 		// print_r($now_seen);
 		file_put_contents('seen.txt', json_encode($now_seen));
-	}
+	// }
 ?>
