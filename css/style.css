@@ -50,6 +50,19 @@
     z-index: 2;
 }
 
+.search-jump {
+    position: fixed;
+    padding: 1px;
+    background: #b1dad8 none repeat scroll 0% 0%;
+    color: white;
+    top: 40px;
+    left: 0px;
+    height: 20px;
+    width: 33px;
+    text-align: center;
+    z-index: 2;
+}
+
 body {
     font-size: 160%;
 }

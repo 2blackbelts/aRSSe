@@ -32,6 +32,11 @@
 	<div class="container">
 		<div class="col-sm-12">
 			<div class="alert alert-info">
+			  Torrent Galaxy has been added.
+			</div>
+		</div>
+		<div class="col-sm-12">
+			<div class="alert alert-info">
 			  Bunnyhop downloads now used for YIFY.
 			</div>
 		</div>
@@ -43,6 +48,12 @@
 	</div>
 	
 	<div class="counter-tick">0</div>
+
+	<div class="search-jump">
+		<a href="#eztv-search">
+			<i class="glyphicon glyphicon-search"></i>
+		</a>
+	</div>
 
 	<div class="se-pre-con"></div>
 

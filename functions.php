@@ -190,4 +190,31 @@ function convert($url) {
 		}
 	}
 
+	// not in use
+	function yify_make_magnet($hash, $long_movie_title) {
+		$mag_base = 'magnet:?xt=urn:btih:';
+		$TORRENT_HASH = $hash;
+		$ENCODED_MOVIE_NAME = '&dn=' . urlencode($long_movie_title);
+		$TRACKERS_ARRAY = array(
+			'http://track.one:1234/announce', 
+			'udp://track.two:80',
+			'udp://open.demonii.com:1337',
+			'udp://tracker.istole.it:80',
+			'http://tracker.yify-torrents.com/announce',
+			'udp://tracker.publicbt.com:80',
+			'udp://tracker.openbittorrent.com:80',
+			'udp://tracker.coppersurfer.tk:6969',
+			'udp://exodus.desync.com:6969',
+			'http://exodus.desync.com:6969/announce'
+			);
+		$TRACKERS_LIST = 0;
+
+		foreach ($TRACKERS_ARRAY as $tr) {
+			$TRACKERS_LIST .= '&tr=' . urlencode($tr);
+		}
+
+		$MAG_URL = $mag_base . $TORRENT_HASH . $ENCODED_MOVIE_NAME . $TRACKERS_LIST;
+		return $MAG_URL;
+	}
+
 ?>
