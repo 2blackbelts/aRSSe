@@ -7,6 +7,7 @@
 	
 	$eztv = convert('https://eztv.ag/ezrss.xml');
 	$yify = convert('https://yts.ag/rss');
+	$yifyAPI = api('https://yts.mx/api/v2/list_movies.json?sort_by=date_added');
 	$showRSS = convert('https://showrss.info/other/all.rss');
 	$seen = json_decode(file_get_contents('seen.txt'), TRUE);
 	$error = 'Error!';
@@ -59,17 +60,23 @@
 	}	
 
 	// print '<pre>'; 
-	// print_r($yify);
+	// print_r($yifyAPI);
 	// print '</pre>';
 
-	print '<h2>Yify</h2>';
-	if($yify == $error){
-		echo 'YIFY is being stingy right now!';
+	print '<h2>Yify API</h2>';
+	// Check status of API response
+	if($yifyAPI->status !== "ok"){
+		echo 'YIFY API is being stingy right now!';
 	} else {
+	// Continue with loop if ok
 		print '<ul class="list-unstyled">';
 		$new = true;
-			foreach($yify['channel']['item'] as $yify_item){
-				if($seen['yify'] === $yify_item['enclosure']['@attributes']['url']) {
+
+		$yify_movies = $yifyAPI->data->movies;
+		foreach ($yify_movies as $yify_movie) {
+			foreach ($yify_movie->torrents as $torrent) {
+
+				if($seen['yify'] === $torrent->url) {
 					$new = false;
 				}
 				print '<li>';
@@ -77,32 +84,33 @@
 
 				create_link_or_icon(
 					$ssh_is_true, 
-					$yify_item['enclosure']['@attributes']['url'], 
-					'download', 
-					1
-					);
+					yify_make_magnet($torrent->hash, $yify_movie->title_long), 
+					'magnet', 
+					0
+				);
 
 				if($new == true) {
 					print '<span class="glyphicon glyphicon-star-empty"></span> ';
 					$counter_new++;
 				} 
-				print '<a href="' . omdb_split(clean($yify_item['guid'], 0), 0) . '" data-remote="false" data-toggle="modal" data-target="#myModal" class="btn btn-warning">Info</a>';
-				// print ' <a href="' . 'http://www.imdb.com/find?ref_=nv_sr_fn&q=' . clean(str_replace(array("720p","1080p"), "", clean($yify_item['guid'], 0)), 0) . '" class="btn btn-warning" target="_blank">IMDB</a>';
+				print '<a href="omdb.php?title=' . urlencode($yify_movie->title) .'&year=' . $yify_movie->year .'" data-remote="false" data-toggle="modal" data-target="#myModal" class="btn btn-warning">Info</a>';
+
+				// concat long title and quality to show user
+				$yify_displayed_title = " " . $yify_movie->title_long . " " . $torrent->quality;
 
 				create_link_or_label(
 					$ssh_is_true, 
-					clean($yify_item['guid'], 0),
-					$yify_item['enclosure']['@attributes']['url'],
-					1
+					$yify_displayed_title,
+					$torrent->url,
+					0
 				);  
-				
-				// print $eztv_item['title'];
-				// print $eztv_item['enclosure']['@attributes']['url'];
 				print '</label></div>';
 				print '</li>';
-			}
-		print '</ul>';
-	}
+			} // end foreach torrent loop
+		
+		} // end foreach movie listing
+	print '</ul>';
+	} // end YifyAPI
 
 	// print '<pre>'; 
 	// print_r($showRSS);

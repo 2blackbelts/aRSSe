@@ -15,6 +15,12 @@ function convert($url) {
 		}
 	}
 
+function api($url) {
+	$data = file_get_contents($url);
+	$json = json_decode($data);
+	return $json;
+}
+
 	function clean($string, $cut) {
 		// list of ugly torrent names to hide
 		$ugly = array(

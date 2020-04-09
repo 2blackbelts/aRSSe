@@ -32,17 +32,12 @@
 	<div class="container">
 		<div class="col-sm-12">
 			<div class="alert alert-info">
-			  Torrent Galaxy has been added.
+			  YIFY finally fixed due to isolation...
 			</div>
 		</div>
 		<div class="col-sm-12">
 			<div class="alert alert-info">
-			  Bunnyhop downloads now used for YIFY.
-			</div>
-		</div>
-		<div class="col-sm-12">
-			<div class="alert alert-info">
-			  Magnet links added to <strong>YIFY search</strong>. Please try them out.
+			  Magnet links added to <strong>YIFY</strong>.
 			</div>
 		</div>
 	</div>
