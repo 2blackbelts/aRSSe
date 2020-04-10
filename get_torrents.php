@@ -296,7 +296,7 @@ if($ssh_is_true == 1){
 	// if($yify !== $error && $eztv !== $error) {
 
 		$now_seen = array(
-					'yify' => $yify['channel']['item'][0]['enclosure']['@attributes']['url'],
+					'yify' => $yifyAPI->data->movies[0]->torrents[0]->url,
 					'eztv' => $eztv['channel']['item'][0]['enclosure']['@attributes']['url'],
 					'showRSS' => $showRSS['channel']['item'][0]['enclosure']['@attributes']['url'],
 					'pct_movie' => $pct_result{0}->torrents->en->{'1080p'}->url,
