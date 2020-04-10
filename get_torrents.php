@@ -4,9 +4,8 @@
 	include 'functions.php';
 
 	$counter_new = 0;
-	
+
 	$eztv = convert('https://eztv.ag/ezrss.xml');
-	$yify = convert('https://yts.ag/rss');
 	$yifyAPI = api('https://yts.mx/api/v2/list_movies.json?sort_by=date_added');
 	$showRSS = convert('https://showrss.info/other/all.rss');
 	$seen = json_decode(file_get_contents('seen.txt'), TRUE);
@@ -268,10 +267,6 @@
 		print 'Torrent Galaxy Failed.';
 	}
 
-
-		
-
-
 	// show yify + EZTV + showRSS search results here
 	print '<div class="eztv"></div>';
 	print '<div class="yify"></div>';
@@ -310,4 +305,5 @@ if($ssh_is_true == 1){
 		// print_r($now_seen);
 		file_put_contents('seen.txt', json_encode($now_seen));
 	// }
+
 ?>
