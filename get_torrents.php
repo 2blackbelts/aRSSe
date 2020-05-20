@@ -156,62 +156,6 @@
 		print '</ul>';
 	}
 
-	print '<h2>Popcorntime Movies 1080p</h2>';
-	try {
-		$pct_url = file_get_contents('https://tv-v2.api-fetch.website/movies/1?sort=last%20added');
-		$pct_result = json_decode($pct_url);
-
-		// var_dump($result);
-
-		print '<ul class="list-unstyled">';
-
-		$new = true;
-		foreach ($pct_result as $movie) {
-			// make sure torrent has 1080p option - otherwise 720p
-			if (isset($movie->torrents->en->{'1080p'})) {
-				$pct_movie_url = $movie->torrents->en->{'1080p'}->url;
-			} else {
-				$pct_movie_url = $movie->torrents->en->{'720p'}->url;
-			}				
-			
-			if($seen['pct_movie'] === $pct_movie_url) {
-					$new = false;
-				}
-			// print $movie->title . '<br>';
-			
-			print '<li>';
-				print '<div class="checkbox"><label>';
-
-				create_link_or_icon(
-					$ssh_is_true, 
-					$pct_movie_url, 
-					'magnet', 
-					0
-					);
-
-				if($new == true) {
-					print '<span class="glyphicon glyphicon-star-empty"></span> ';
-					$counter_new++;
-				} 	
-				print '<a href="' . omdb_split(clean($movie->title . " " . $movie->year . " 1080p", 0), 1) . '" data-remote="false" data-toggle="modal" data-target="#myModal" class="btn btn-info">Info</a> ';
-
-				create_link_or_label(
-					$ssh_is_true, 
-					$movie->title . " " . $movie->year,
-					$pct_movie_url,
-					0
-					);
-				// print $movie->title . " " . $movie->year;
-				print '</label></div>';
-				
-			print '</li>';
-			}
-
-		print '</ul>';
-	} catch (Exception $e) {
-		print 'Popcorntime is being stingy right now.';
-	}
-
 	print '<h2>Torrent Galaxy (24hrs)</h2>';
 	try {
 		$tg_dump_file = file_get_contents("torrent-galaxy/clean.json");
@@ -299,7 +243,6 @@ if($ssh_is_true == 1){
 					'yify' => $yifyAPI->data->movies[0]->torrents[0]->url,
 					'eztv' => $eztv['channel']['item'][0]['enclosure']['@attributes']['url'],
 					'showRSS' => $showRSS['channel']['item'][0]['enclosure']['@attributes']['url'],
-					'pct_movie' => $pct_result{0}->torrents->en->{'1080p'}->url,
 					'tg' => $torrent_galaxy[0]['magnet']
 					); 
 		// print_r($now_seen);
