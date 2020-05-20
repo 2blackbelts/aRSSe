@@ -23,7 +23,7 @@
 			width: 100%;
 			height: 100%;
 			z-index: 9999;
-			background: url(css/images/loader-128x/Preloader_' . rand(1,13) . '.gif) center no-repeat #fff;
+			background: url(css/images/loader-128x/Preloader_' . rand(1,12) . '.gif) center no-repeat #fff;
 		}'; 
 	?>
 	</style>
@@ -32,7 +32,7 @@
 	<div class="container">
 		<div class="col-sm-12">
 			<div class="alert alert-info">
-			  YIFY finally fixed due to isolation...
+			  Silence is golden
 			</div>
 		</div>
 		<div class="col-sm-12">
@@ -112,7 +112,6 @@
 		  $( ".result" ).html( data );
 		  // alert( "Load was performed." );
 		  $(".se-pre-con").hide();
-		  document.getElementById('bgmusic').play();
 		})
 		.fail(function() {
 		    alert( "Failed to load. Please try again." );
@@ -187,42 +186,10 @@
 				var n = $('input[name="torrent[]"]:checked').length;
 				console.log(n);
 				$('.counter-tick').text(n);
-				var n = Math.floor(Math.random() * 14) + 1  
-				document.getElementById('fart' + n).play();
+				
 			});	 
 
-			$( "input[type='text']" ).keydown(function() {
-			  	var n = Math.floor(Math.random() * 9) + 1  
-				document.getElementById('short' + n).play();
-			});
-			
-
 	</script>
-
-	<audio id="bgmusic" controls>
-	  <source src="audio/GirlFromIpanema.mp3" type="audio/mpeg">
-	  Your browser does not support the audio element.
-	</audio>
-
-<?php
-	$farts = scandir('sfx/long');
-	$fart_count = 1;
-	foreach ($farts as $fart) {
-		print '<audio id="fart' . $fart_count . '">';
-		print '<source src="sfx/long/' . $fart . '" type="audio/mpeg">';
-		print '</audio>';
-		$fart_count ++;
-	}
-	$short_farts = scandir('sfx/short');
-	$short_count = 1;
-	foreach ($short_farts as $short_fart) {
-		print '<audio id="short' . $short_count . '">';
-		print '<source src="sfx/short/' . $short_fart . '" type="audio/wav">';
-		print '</audio>';
-		$short_count ++;
-	}
-	
-?>
 
 <!-- Default bootstrap modal example -->
 <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
